@@ -21,16 +21,13 @@ jobs:
             wget -c https://repo.continuum.io/archive/Anaconda3-5.3.0-Linux-x86_64.sh
             bash Anaconda3-5.3.0-Linux-x86_64.sh -b
             export PATH=~/anaconda3/bin:$PATH
-            ls -la && cd rock
-            ls -la conda
-            conda env create  --name test —-file=conda/condaenv.yml
+            ls -la && cd rock/conda
+            conda env create --name test --file condaenv.yaml && source activate test
       - run:
           name: Tests
           command: |
-            cd cpp/build
-            cmake —build .
+            cd /app/rock/cpp/tests
             ctest .
-
 
 workflows:
   version: 2
