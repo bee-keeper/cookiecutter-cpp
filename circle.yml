@@ -26,8 +26,8 @@ jobs:
       - run:
           name: Tests
           command: |
-            cd /app/rock/cpp/tests
-            ctest .
+            cd /app/rock
+            make test
 
 workflows:
   version: 2
