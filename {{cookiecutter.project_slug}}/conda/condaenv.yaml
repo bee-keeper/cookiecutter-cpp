@@ -10,7 +10,7 @@ dependencies:
   - conan=1.12
   - ninja=1.9
   - scikit-build=0.8
-  - bump2version=5.8
+  # - bump2version=5.8. // ResolvePackageNotFound:
   - python=3.6
 # --- dev dependencies ---
   - pybind11=2.2
