@@ -1,0 +1,32 @@
+version: 2
+jobs:
+
+  test_and_build:
+    docker:
+      - image: buildpack-deps:bionic
+    working_directory: /app
+    environment:
+      # ENVIRONMENT: staging
+    steps:
+      - checkout
+      - run:
+          name:
+          command: |
+            apt-get install doxygen
+            pip install cookiecutter
+            wget -c https://repo.continuum.io/archive/Anaconda3-5.3.0-Linux-x86_64.sh
+            bash Anaconda3-5.3.0-Linux-x86_64.sh
+            #
+            cookiecutter --no-input .
+            ls -la && cd rock
+            conda env create —f conda/condaenv.yml
+            cd cpp/build
+            cmake —build .
+            ctest .
+
+
+workflows:
+  version: 2
+  test_and_push:
+    jobs:
+      - test_and_build
