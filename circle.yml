@@ -22,11 +22,12 @@ jobs:
             bash Anaconda3-5.3.0-Linux-x86_64.sh -b
             export PATH=~/anaconda3/bin:$PATH
             ls -la && cd rock/conda
-            conda env create --name test --file condaenv.yaml && source activate test
+            conda env create --name test --file condaenv.yaml
       - run:
           name: Tests
           command: |
-            echo $PATH
+            export PATH=~/anaconda3/bin:$PATH
+            source activate test
             cd /app/rock/cpp
             cmake --build .
 
