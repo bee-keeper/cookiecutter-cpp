@@ -3,7 +3,7 @@ jobs:
 
   test_and_build:
     docker:
-      - image: buildpack-deps:bionic
+      - image: buildpack-deps:trusty
     working_directory: /app
     environment:
       # ENVIRONMENT: staging
@@ -18,7 +18,8 @@ jobs:
       - run:
           name: Conda
           command: |
-            wget -c https://repo.continuum.io/archive/Anaconda3-5.3.0-Linux-x86_64.sh
+            # https://repo.continuum.io/archive/Anaconda3-5.3.0-Linux-x86_64.sh
+            wget -c https://repo.anaconda.com/miniconda/Miniconda3-4.5.12-Linux-x86_64.sh
             bash Anaconda3-5.3.0-Linux-x86_64.sh -b
             export PATH=~/anaconda3/bin:$PATH
             ls -la && cd rock/conda
