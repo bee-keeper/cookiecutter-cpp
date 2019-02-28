@@ -10,9 +10,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build deps
+          name: Cookie deps
           command: |
-            apt-get update && apt-get install -y doxygen && apt-get install -y python-pip
+            apt-get update && apt-get install -y python-pip
             pip install cookiecutter
             cookiecutter --no-input .
       - run:
@@ -23,14 +23,21 @@ jobs:
             export PATH=~/anaconda3/bin:$PATH
             ls -la && cd rock/conda
             conda env create --name test --file condaenv.yaml
+      # - run:
+      #     name: Test
+      #     command: |
+      #       export PATH=~/anaconda3/bin:$PATH
+      #       source activate test
+      #       cd /app/rock/cpp
+      #       ctest
       - run:
-          name: Tests
+          name: Build
           command: |
             export PATH=~/anaconda3/bin:$PATH
             source activate test
             cd /app/rock/cpp
+            cmake . -DCMAKE_BUILD_TYPE=Release
             cmake --build .
-
 
 workflows:
   version: 2
